@@ -1,0 +1,2 @@
+# Install this optional provider only when you want live Gemini analysis.
+google-genai>=1.0,<2.0

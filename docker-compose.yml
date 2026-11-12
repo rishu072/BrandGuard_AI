@@ -1,0 +1,24 @@
+services:
+  mongodb:
+    image: mongo:8
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME:-brandguard}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD:-ChangeMeMongo2026}
+    ports:
+      - "127.0.0.1:27017:27017"
+    volumes:
+      - brandguard-mongo:/data/db
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    profiles: ["rag"]
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:6333:6333"
+    volumes:
+      - brandguard-qdrant:/qdrant/storage
+
+volumes:
+  brandguard-mongo:
+  brandguard-qdrant:
